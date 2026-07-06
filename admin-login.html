@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Sorri + Vida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="admin-app">
+      <section class="admin-login">
+        <form class="login-card" id="serverLoginForm">
+          <span class="brand-mark">S+</span>
+          <h1>Portal do Admin</h1>
+          <p>Sorri + Vida</p>
+          <label>Usuário<input name="user" autocomplete="username" required /></label>
+          <label>Senha<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="btn primary full" type="submit">Entrar</button>
+          <small id="loginFeedback"></small>
+        </form>
+      </section>
+    </div>
+    <script>
+      document.getElementById("serverLoginForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const feedback = document.getElementById("loginFeedback");
+        const data = new FormData(event.currentTarget);
+        feedback.textContent = "";
+        try {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user: data.get("user"), password: data.get("password") })
+          });
+          if (!response.ok) throw new Error("Usuário ou senha inválidos.");
+          location.href = "/admin-sorrimaisvida/painel";
+        } catch (error) {
+          feedback.textContent = error.message || "Não foi possível entrar.";
+        }
+      });
+    </script>
+  </body>
+</html>

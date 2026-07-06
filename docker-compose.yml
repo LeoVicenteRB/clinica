@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    container_name: sorri_mais_vida_web
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-4173}:4173"
+    environment:
+      PORT: 4173
+      DATABASE_URL: postgres://${POSTGRES_USER:-clinica}:${POSTGRES_PASSWORD:-clinica123}@db:5432/${POSTGRES_DB:-clinica}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-sorrimaisvida}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: sorri_mais_vida_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-clinica}
+      POSTGRES_USER: ${POSTGRES_USER:-clinica}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-clinica123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-clinica} -d ${POSTGRES_DB:-clinica}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

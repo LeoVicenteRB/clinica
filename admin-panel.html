@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel Admin | Sorri + Vida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="publicApp" hidden></div>
+    <div id="adminApp" class="admin-app">
+      <section id="adminLogin" hidden></section>
+      <section id="adminDashboard" class="admin-dashboard">
+        <aside class="admin-sidebar">
+          <a class="brand admin-brand" href="/">
+            <span class="brand-mark">S+</span>
+            <span><strong>Sorri + Vida</strong><small>Painel de edição</small></span>
+          </a>
+          <nav class="admin-tabs" aria-label="Seções do painel">
+            <button class="active" data-tab="geral" type="button">Geral</button>
+            <button data-tab="sobre" type="button">Quem Somos</button>
+            <button data-tab="carrossel" type="button">Carrossel</button>
+            <button data-tab="usuarios" type="button">Usuários</button>
+            <button data-tab="preview" type="button">Preview</button>
+          </nav>
+          <button class="btn ghost full" id="logoutBtn" type="button">Sair</button>
+        </aside>
+
+        <main class="admin-main">
+          <div class="admin-topbar">
+            <div>
+              <p class="eyebrow">Admin</p>
+              <h1>Editar informações do site</h1>
+            </div>
+            <button class="btn primary" id="saveAllBtn" type="button">Salvar alterações</button>
+          </div>
+          <div class="admin-alert" id="adminFeedback" role="status"></div>
+
+          <div id="settingsForm" class="admin-panels">
+            <section class="admin-panel active" data-panel="geral">
+              <div class="form-grid">
+                <label>Nome da clínica<input name="clinicName" /></label>
+                <label>Slogan<input name="slogan" /></label>
+                <label>Título da home<input name="heroTitle" /></label>
+                <label>Texto do botão principal<input name="ctaText" /></label>
+                <label>Link do botão principal<input name="ctaHref" /></label>
+                <label>Telefone<input name="phone" /></label>
+                <label>WhatsApp<input name="whatsapp" /></label>
+                <label>E-mail<input name="email" type="email" /></label>
+                <label>Horário de atendimento<input name="hours" /></label>
+                <label>Endereço completo<input name="address" /></label>
+                <label>Link do Google Maps<input name="mapsLink" /></label>
+                <label class="wide">Texto principal da home<textarea name="homeText" rows="4"></textarea></label>
+                <label class="wide">Iframe/embed do Google Maps<textarea name="mapsEmbed" rows="5"></textarea></label>
+                <label>Logo ou imagem principal<input type="file" data-upload="heroImage" accept="image/jpeg,image/png,image/webp" /></label>
+              </div>
+              <h2>Destaques rápidos</h2>
+              <div id="highlightsEditor" class="list-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="sobre">
+              <div class="form-grid">
+                <label>Título da seção<input name="aboutTitle" /></label>
+                <label class="wide">Texto institucional<textarea name="aboutText" rows="5"></textarea></label>
+                <label>Missão<textarea name="mission" rows="3"></textarea></label>
+                <label>Visão<textarea name="vision" rows="3"></textarea></label>
+                <label>Valores<textarea name="values" rows="3"></textarea></label>
+                <label>Imagem da seção<input type="file" data-upload="aboutImage" accept="image/jpeg,image/png,image/webp" /></label>
+              </div>
+              <h2>Diferenciais da clínica</h2>
+              <div id="differentialsEditor" class="list-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="carrossel">
+              <div class="upload-box">
+                <label>Adicionar imagem ao carrossel<input id="carouselUpload" type="file" accept="image/jpeg,image/png,image/webp" /></label>
+                <p>Formatos aceitos: jpg, jpeg, png e webp. Tamanho máximo: 2 MB.</p>
+              </div>
+              <div id="carouselEditor" class="carousel-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="usuarios">
+              <div class="users-layout">
+                <form id="userForm" class="user-form">
+                  <h2>Criar usuário</h2>
+                  <label>Usuário<input name="username" autocomplete="off" required minlength="3" /></label>
+                  <label>Nome<input name="displayName" autocomplete="off" /></label>
+                  <label>Senha<input name="password" type="password" required minlength="8" /></label>
+                  <button class="btn primary full" type="submit">Criar usuário</button>
+                </form>
+                <div>
+                  <h2>Usuários cadastrados</h2>
+                  <div id="usersList" class="users-list"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="admin-panel" data-panel="preview">
+              <div class="preview-card">
+                <h2>Preview rápido</h2>
+                <p>Salve as alterações e volte ao site público para ver tudo aplicado na página completa.</p>
+                <a class="btn secondary" href="/">Abrir site público</a>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>

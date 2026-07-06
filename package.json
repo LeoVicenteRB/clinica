@@ -1,0 +1,17 @@
+{
+  "name": "sorri-mais-vida-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional da clínica Sorri + Vida com portal admin e persistência em Postgres.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check app.js"
+  },
+  "dependencies": {
+    "pg": "8.12.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

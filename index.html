@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sorri + Vida | Clínica odontológica</title>
+    <meta
+      name="description"
+      content="Clínica odontológica Sorri + Vida. Atendimento humanizado, tecnologia e cuidado para toda a família."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js"></script>
+  </head>
+  <body>
+    <div id="publicApp">
+      <header class="site-header">
+        <a class="brand" href="#inicio" aria-label="Sorri + Vida">
+          <span class="brand-mark">S+</span>
+          <span>
+            <strong data-bind="clinicName">Sorri + Vida</strong>
+            <small data-bind="slogan">Cuidando do seu sorriso com carinho, tecnologia e confiança.</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" aria-label="Menu principal">
+          <a href="#inicio">Início</a>
+          <a href="#quem-somos">Quem Somos</a>
+          <a href="#contato">Contato</a>
+          <a href="#localizacao">Localização</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="inicio" class="hero section-band">
+          <div class="hero-content">
+            <p class="eyebrow">Odontologia humanizada</p>
+            <h1 data-bind="heroTitle">Sorrisos saudáveis começam com cuidado de verdade.</h1>
+            <p class="hero-text" data-bind="homeText">
+              Na Sorri + Vida, oferecemos atendimento odontológico humanizado para toda a família,
+              unindo profissionais qualificados, estrutura confortável e cuidado em cada detalhe.
+            </p>
+            <div class="hero-actions">
+              <a class="btn primary" data-bind-attr="ctaHref:href" href="#" target="_blank" rel="noopener">
+                <span data-bind="ctaText">Agende sua avaliação</span>
+              </a>
+              <a class="btn ghost" href="#quem-somos">Conheça a clínica</a>
+            </div>
+            <div class="quick-highlights" data-repeat="highlights"></div>
+          </div>
+          <div class="hero-media">
+            <img data-bind-attr="heroImage:src" src="./assets/clinic-hero.png" alt="Ambiente moderno da clínica" />
+            <div class="hero-note">
+              <strong>Atendimento completo</strong>
+              <span>Prevenção, estética, reabilitação e cuidado familiar.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-shell carousel-shell" aria-label="Carrossel de imagens">
+          <div class="section-heading">
+            <p class="eyebrow">Nossa estrutura</p>
+            <h2>Um espaço preparado para receber você com conforto.</h2>
+          </div>
+          <div class="carousel" data-carousel>
+            <button class="carousel-control prev" type="button" aria-label="Imagem anterior">‹</button>
+            <div class="carousel-track" data-carousel-track></div>
+            <button class="carousel-control next" type="button" aria-label="Próxima imagem">›</button>
+          </div>
+          <div class="carousel-dots" data-carousel-dots></div>
+        </section>
+
+        <section id="quem-somos" class="about section-band alt">
+          <div class="about-image">
+            <img data-bind-attr="aboutImage:src" src="./assets/clinic-hero.png" alt="Equipe e estrutura da clínica" />
+          </div>
+          <div class="about-content">
+            <p class="eyebrow">Quem somos</p>
+            <h2 data-bind="aboutTitle">Clínica Sorri + Vida</h2>
+            <p data-bind="aboutText">
+              Somos uma clínica odontológica focada em acolhimento, prevenção e tratamentos personalizados.
+              Nosso compromisso é tornar cada consulta mais tranquila, clara e segura.
+            </p>
+            <div class="pillars">
+              <article>
+                <span>Missão</span>
+                <p data-bind="mission">Cuidar da saúde bucal com excelência, respeito e atenção aos detalhes.</p>
+              </article>
+              <article>
+                <span>Visão</span>
+                <p data-bind="vision">Ser referência em odontologia humanizada e acessível na região.</p>
+              </article>
+              <article>
+                <span>Valores</span>
+                <p data-bind="values">Ética, acolhimento, transparência, tecnologia e compromisso com o paciente.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-shell">
+          <div class="section-heading compact">
+            <p class="eyebrow">Diferenciais</p>
+            <h2>Cuidado técnico com uma experiência mais leve.</h2>
+          </div>
+          <div class="feature-grid" data-repeat="differentials"></div>
+        </section>
+
+        <section id="contato" class="contact section-band">
+          <div class="contact-info">
+            <p class="eyebrow">Contato</p>
+            <h2>Fale com a nossa equipe.</h2>
+            <p>Agende sua avaliação ou tire dúvidas pelo canal de sua preferência.</p>
+            <div class="contact-list">
+              <a data-bind-attr="phoneHref:href"><strong>Telefone</strong><span data-bind="phone"></span></a>
+              <a data-bind-attr="whatsappHref:href" target="_blank" rel="noopener"><strong>WhatsApp</strong><span data-bind="whatsapp"></span></a>
+              <a data-bind-attr="emailHref:href"><strong>E-mail</strong><span data-bind="email"></span></a>
+              <div><strong>Horário</strong><span data-bind="hours"></span></div>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <label>Nome<input name="name" required autocomplete="name" /></label>
+            <label>Telefone<input name="phone" required autocomplete="tel" /></label>
+            <label>E-mail<input name="email" type="email" autocomplete="email" /></label>
+            <label>Mensagem<textarea name="message" rows="5" required></textarea></label>
+            <button class="btn primary full" type="submit">Enviar pelo WhatsApp</button>
+          </form>
+        </section>
+
+        <section id="localizacao" class="location section-shell">
+          <div class="section-heading">
+            <p class="eyebrow">Localização</p>
+            <h2>Estamos em uma região de fácil acesso.</h2>
+            <p data-bind="address">Av. Brasil, 1000 - Centro, São Paulo - SP</p>
+            <a class="btn secondary" data-bind-attr="mapsLink:href" href="#" target="_blank" rel="noopener">Como chegar</a>
+          </div>
+          <div class="map-frame" data-map-container></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <strong data-bind="clinicName">Sorri + Vida</strong>
+          <p data-bind="slogan">Cuidando do seu sorriso com carinho, tecnologia e confiança.</p>
+        </div>
+        <a data-bind-attr="whatsappHref:href" target="_blank" rel="noopener">Agendar avaliação</a>
+      </footer>
+    </div>
+
+    <div id="adminApp" class="admin-app" hidden>
+      <section id="adminLogin" class="admin-login">
+        <form class="login-card" id="loginForm">
+          <span class="brand-mark">S+</span>
+          <h1>Portal do Admin</h1>
+          <p>Sorri + Vida</p>
+          <label>Usuário<input name="user" autocomplete="username" required /></label>
+          <label>Senha<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="btn primary full" type="submit">Entrar</button>
+          <small id="loginFeedback"></small>
+        </form>
+      </section>
+
+      <section id="adminDashboard" class="admin-dashboard" hidden>
+        <aside class="admin-sidebar">
+          <a class="brand admin-brand" href="./">
+            <span class="brand-mark">S+</span>
+            <span><strong>Sorri + Vida</strong><small>Painel de edição</small></span>
+          </a>
+          <nav class="admin-tabs" aria-label="Seções do painel">
+            <button class="active" data-tab="geral" type="button">Geral</button>
+            <button data-tab="sobre" type="button">Quem Somos</button>
+            <button data-tab="carrossel" type="button">Carrossel</button>
+            <button data-tab="preview" type="button">Preview</button>
+          </nav>
+          <button class="btn ghost full" id="logoutBtn" type="button">Sair</button>
+        </aside>
+
+        <main class="admin-main">
+          <div class="admin-topbar">
+            <div>
+              <p class="eyebrow">Admin</p>
+              <h1>Editar informações do site</h1>
+            </div>
+            <button class="btn primary" id="saveAllBtn" type="button">Salvar alterações</button>
+          </div>
+          <div class="admin-alert" id="adminFeedback" role="status"></div>
+
+          <div id="settingsForm" class="admin-panels">
+            <section class="admin-panel active" data-panel="geral">
+              <div class="form-grid">
+                <label>Nome da clínica<input name="clinicName" /></label>
+                <label>Slogan<input name="slogan" /></label>
+                <label>Título da home<input name="heroTitle" /></label>
+                <label>Texto do botão principal<input name="ctaText" /></label>
+                <label>Link do botão principal<input name="ctaHref" /></label>
+                <label>Telefone<input name="phone" /></label>
+                <label>WhatsApp<input name="whatsapp" /></label>
+                <label>E-mail<input name="email" type="email" /></label>
+                <label>Horário de atendimento<input name="hours" /></label>
+                <label>Endereço completo<input name="address" /></label>
+                <label>Link do Google Maps<input name="mapsLink" /></label>
+                <label class="wide">Texto principal da home<textarea name="homeText" rows="4"></textarea></label>
+                <label class="wide">Iframe/embed do Google Maps<textarea name="mapsEmbed" rows="5"></textarea></label>
+                <label>Logo ou imagem principal<input type="file" data-upload="heroImage" accept="image/jpeg,image/png,image/webp" /></label>
+              </div>
+              <h2>Destaques rápidos</h2>
+              <div id="highlightsEditor" class="list-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="sobre">
+              <div class="form-grid">
+                <label>Título da seção<input name="aboutTitle" /></label>
+                <label class="wide">Texto institucional<textarea name="aboutText" rows="5"></textarea></label>
+                <label>Missão<textarea name="mission" rows="3"></textarea></label>
+                <label>Visão<textarea name="vision" rows="3"></textarea></label>
+                <label>Valores<textarea name="values" rows="3"></textarea></label>
+                <label>Imagem da seção<input type="file" data-upload="aboutImage" accept="image/jpeg,image/png,image/webp" /></label>
+              </div>
+              <h2>Diferenciais da clínica</h2>
+              <div id="differentialsEditor" class="list-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="carrossel">
+              <div class="upload-box">
+                <label>Adicionar imagem ao carrossel<input id="carouselUpload" type="file" accept="image/jpeg,image/png,image/webp" /></label>
+                <p>Formatos aceitos: jpg, jpeg, png e webp. Tamanho máximo: 2 MB.</p>
+              </div>
+              <div id="carouselEditor" class="carousel-editor"></div>
+            </section>
+
+            <section class="admin-panel" data-panel="preview">
+              <div class="preview-card">
+                <h2>Preview rápido</h2>
+                <p>Salve as alterações e volte ao site público para ver tudo aplicado na página completa.</p>
+                <a class="btn secondary" href="./">Abrir site público</a>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
