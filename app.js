@@ -28,6 +28,17 @@
     vision: "Ser referência em odontologia humanizada e acessível na região.",
     values: "Ética, acolhimento, transparência, tecnologia e compromisso com o paciente.",
     aboutImage: "./assets/clinic-hero.png",
+    theme: {
+      ink: "#17313b",
+      muted: "#5c727b",
+      line: "#dbe8e9",
+      paper: "#ffffff",
+      soft: "#f5fbfa",
+      aqua: "#35c5b2",
+      blue: "#4d8fcb",
+      green: "#7acb84",
+      coral: "#ff8f70"
+    },
     highlights: [
       { title: "Atendimento humanizado", description: "Escuta ativa e orientação clara em cada etapa." },
       { title: "Profissionais qualificados", description: "Equipe preparada para diferentes necessidades." },
@@ -103,6 +114,7 @@
   }
 
   function updateBindings() {
+    applyTheme();
     document.querySelectorAll("[data-bind]").forEach((el) => {
       const key = el.dataset.bind;
       el.textContent = sanitizeText(settings[key]);
@@ -325,20 +337,33 @@
       const field = form.querySelector(`[name="${key}"]`);
       if (field && typeof settings[key] !== "object") field.value = settings[key] || "";
     });
+    Object.entries({ ...defaultSettings.theme, ...(settings.theme || {}) }).forEach(([key, value]) => {
+      const field = form.querySelector(`[name="theme.${key}"]`);
+      if (field) field.value = value;
+    });
   }
 
   function handleLiveFormChange(event) {
     const field = event.target;
     if (!field.name || field.type === "file") return;
-    settings[field.name] = field.value;
+    if (field.name.startsWith("theme.")) {
+      const key = field.name.replace("theme.", "");
+      settings.theme = { ...(settings.theme || defaultSettings.theme), [key]: field.value };
+    } else {
+      settings[field.name] = field.value;
+    }
     updateBindings();
   }
 
   async function saveFromAdmin() {
     const form = byId("settingsForm");
-    form.querySelectorAll('[data-panel="geral"] [name], [data-panel="sobre"] [name]').forEach((field) => {
+    form.querySelectorAll('[data-panel="geral"] [name], [data-panel="sobre"] [name], [data-panel="aparencia"] [name]').forEach((field) => {
       if (field.type !== "file" && field.name in settings && typeof settings[field.name] !== "object") {
         settings[field.name] = field.value;
+      }
+      if (field.name.startsWith("theme.")) {
+        const key = field.name.replace("theme.", "");
+        settings.theme = { ...(settings.theme || defaultSettings.theme), [key]: field.value };
       }
     });
     collectListEditor("highlights", "highlightsEditor");
@@ -561,6 +586,15 @@
     box.style.background = isError ? "#fdeceb" : "#e8f7ed";
     box.classList.add("show");
     window.setTimeout(() => box.classList.remove("show"), 3500);
+  }
+
+  function applyTheme() {
+    const theme = { ...defaultSettings.theme, ...(settings.theme || {}) };
+    Object.entries(theme).forEach(([key, value]) => {
+      if (/^#[0-9a-f]{6}$/i.test(value)) {
+        document.documentElement.style.setProperty(`--${key}`, value);
+      }
+    });
   }
 
   async function loadUsers() {

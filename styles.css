@@ -48,6 +48,11 @@ textarea {
   font: inherit;
 }
 
+input[type="color"] {
+  min-height: 46px;
+  padding: 5px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -760,6 +765,12 @@ textarea:focus {
 .users-list {
   display: grid;
   gap: 10px;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 @media (max-width: 1100px) {

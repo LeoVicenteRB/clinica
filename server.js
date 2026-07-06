@@ -56,6 +56,17 @@ const defaultSettings = {
   vision: "Ser referência em odontologia humanizada e acessível na região.",
   values: "Ética, acolhimento, transparência, tecnologia e compromisso com o paciente.",
   aboutImage: "./assets/clinic-hero.png",
+  theme: {
+    ink: "#17313b",
+    muted: "#5c727b",
+    line: "#dbe8e9",
+    paper: "#ffffff",
+    soft: "#f5fbfa",
+    aqua: "#35c5b2",
+    blue: "#4d8fcb",
+    green: "#7acb84",
+    coral: "#ff8f70"
+  },
   highlights: [
     { title: "Atendimento humanizado", description: "Escuta ativa e orientação clara em cada etapa." },
     { title: "Profissionais qualificados", description: "Equipe preparada para diferentes necessidades." },
@@ -325,10 +336,20 @@ function normalizeSettings(input = {}) {
   return {
     ...defaultSettings,
     ...input,
+    theme: normalizeTheme(input.theme),
     highlights: Array.isArray(input.highlights) ? input.highlights : defaultSettings.highlights,
     differentials: Array.isArray(input.differentials) ? input.differentials : defaultSettings.differentials,
     carouselImages: Array.isArray(input.carouselImages) ? input.carouselImages : defaultSettings.carouselImages
   };
+}
+
+function normalizeTheme(theme = {}) {
+  return Object.fromEntries(
+    Object.entries(defaultSettings.theme).map(([key, fallback]) => {
+      const value = String(theme[key] || fallback).trim();
+      return [key, /^#[0-9a-f]{6}$/i.test(value) ? value : fallback];
+    })
+  );
 }
 
 function requireAdmin(req, res) {
@@ -371,12 +392,33 @@ function redirect(res, location) {
 }
 
 async function ensureDefaultUser() {
-  const adminUser = process.env.ADMIN_USER || "admin";
-  const adminPassword = process.env.ADMIN_PASSWORD || "sorrimaisvida";
+  const rawAdminUser = process.env.ADMIN_USER || "admin";
+  const adminUser = normalizeUsername(rawAdminUser) || "admin";
+  let adminPassword = String(process.env.ADMIN_PASSWORD || "sorrimaisvida");
+
+  if (adminUser !== rawAdminUser) {
+    console.warn(`ADMIN_USER inválido ou normalizado. Usando "${adminUser}".`);
+  }
+
+  if (adminPassword.length < 8) {
+    adminPassword = crypto.randomBytes(12).toString("base64url");
+    console.warn(`ADMIN_PASSWORD inválido ou curto. Senha temporária gerada para "${adminUser}": ${adminPassword}`);
+  }
+
   const existing = await findUserByUsername(adminUser);
   if (!existing) {
     await createUser(adminUser, adminPassword, "Administrador");
+    console.log(`Usuário admin inicial criado: ${adminUser}`);
+    return;
   }
+
+  if (process.env.RESET_ADMIN_PASSWORD_ON_START === "true") {
+    await createUser(adminUser, adminPassword, existing.display_name || "Administrador");
+    console.log(`Senha do usuário admin redefinida via RESET_ADMIN_PASSWORD_ON_START: ${adminUser}`);
+    return;
+  }
+
+  console.log(`Usuário admin inicial já existe: ${adminUser}`);
 }
 
 async function findUserByUsername(username) {

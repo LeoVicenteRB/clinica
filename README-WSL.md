@@ -55,6 +55,7 @@ POSTGRES_USER=clinica
 POSTGRES_PASSWORD=uma_senha_forte
 ADMIN_USER=admin
 ADMIN_PASSWORD=uma_senha_forte
+RESET_ADMIN_PASSWORD_ON_START=false
 ```
 
 ## Comandos úteis
@@ -101,5 +102,6 @@ Tudo que o admin salva vai para o Postgres. Imagens enviadas pelo painel são sa
 - Senhas não ficam no frontend.
 - Senhas dos usuários são salvas com hash PBKDF2.
 - O primeiro usuário é criado automaticamente com `ADMIN_USER` e `ADMIN_PASSWORD` do `.env`.
+- Se precisar forçar reset da senha do admin existente, use temporariamente `RESET_ADMIN_PASSWORD_ON_START=true`, reinicie, entre com a nova senha e depois volte para `false`.
 
 Depois de entrar no painel, use a aba **Usuários** para criar novos acessos.
