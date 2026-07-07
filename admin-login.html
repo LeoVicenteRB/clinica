@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin | Sorri + Vida</title>
+    <title>Admin</title>
+    <meta name="description" content="Acesso administrativo do site da clínica." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -13,9 +14,9 @@
     <div class="admin-app">
       <section class="admin-login">
         <form class="login-card" id="serverLoginForm">
-          <span class="brand-mark">S+</span>
+          <span class="brand-mark" id="brandMark">C</span>
           <h1>Portal do Admin</h1>
-          <p>Sorri + Vida</p>
+          <p id="clinicName">Clínica</p>
           <label>Usuário<input name="user" autocomplete="username" required /></label>
           <label>Senha<input name="password" type="password" autocomplete="current-password" required /></label>
           <button class="btn primary full" type="submit">Entrar</button>
@@ -24,6 +25,20 @@
       </section>
     </div>
     <script>
+      async function loadLoginBrand() {
+        try {
+          const response = await fetch("/api/settings", { headers: { Accept: "application/json" } });
+          if (!response.ok) return;
+          const settings = await response.json();
+          const title = settings.siteTitle || settings.clinicName || "Clínica";
+          const name = settings.clinicName || title;
+          document.title = `${title} | Admin`;
+          document.getElementById("clinicName").textContent = name;
+          document.getElementById("brandMark").textContent = name.trim().charAt(0).toUpperCase() || "C";
+        } catch {}
+      }
+      loadLoginBrand();
+
       document.getElementById("serverLoginForm").addEventListener("submit", async (event) => {
         event.preventDefault();
         const feedback = document.getElementById("loginFeedback");

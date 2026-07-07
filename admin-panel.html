@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Painel Admin | Sorri + Vida</title>
+    <title>Painel Admin</title>
+    <meta name="description" content="Painel administrativo do site da clínica." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,8 +17,8 @@
       <section id="adminDashboard" class="admin-dashboard">
         <aside class="admin-sidebar">
           <a class="brand admin-brand" href="/">
-            <span class="brand-mark">S+</span>
-            <span><strong>Sorri + Vida</strong><small>Painel de edição</small></span>
+            <span class="brand-mark" data-brand-mark>C</span>
+            <span><strong data-bind="clinicName">Clínica</strong><small>Painel de edição</small></span>
           </a>
           <nav class="admin-tabs" aria-label="Seções do painel">
             <button class="active" data-tab="geral" type="button">Geral</button>
@@ -44,6 +45,8 @@
             <section class="admin-panel active" data-panel="geral">
               <div class="form-grid">
                 <label>Nome da clínica<input name="clinicName" /></label>
+                <label>Título da página<input name="siteTitle" /></label>
+                <label class="wide">Descrição para buscadores<textarea name="metaDescription" rows="3"></textarea></label>
                 <label>Slogan<input name="slogan" /></label>
                 <label>Título da home<input name="heroTitle" /></label>
                 <label>Texto do botão principal<input name="ctaText" /></label>

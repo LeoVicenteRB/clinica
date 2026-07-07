@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sorri + Vida | Clínica odontológica</title>
+    <title>Clínica odontológica</title>
     <meta
       name="description"
-      content="Clínica odontológica Sorri + Vida. Atendimento humanizado, tecnologia e cuidado para toda a família."
+      content="Clínica odontológica com atendimento humanizado, tecnologia e cuidado para toda a família."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,10 +20,10 @@
   <body>
     <div id="publicApp">
       <header class="site-header">
-        <a class="brand" href="#inicio" aria-label="Sorri + Vida">
-          <span class="brand-mark">S+</span>
+        <a class="brand" href="#inicio" aria-label="Clínica">
+          <span class="brand-mark" data-brand-mark>C</span>
           <span>
-            <strong data-bind="clinicName">Sorri + Vida</strong>
+            <strong data-bind="clinicName">Clínica</strong>
             <small data-bind="slogan">Cuidando do seu sorriso com carinho, tecnologia e confiança.</small>
           </span>
         </a>
@@ -44,7 +44,7 @@
             <p class="eyebrow">Odontologia humanizada</p>
             <h1 data-bind="heroTitle">Sorrisos saudáveis começam com cuidado de verdade.</h1>
             <p class="hero-text" data-bind="homeText">
-              Na Sorri + Vida, oferecemos atendimento odontológico humanizado para toda a família,
+              Oferecemos atendimento odontológico humanizado para toda a família,
               unindo profissionais qualificados, estrutura confortável e cuidado em cada detalhe.
             </p>
             <div class="hero-actions">
@@ -83,7 +83,7 @@
           </div>
           <div class="about-content">
             <p class="eyebrow">Quem somos</p>
-            <h2 data-bind="aboutTitle">Clínica Sorri + Vida</h2>
+            <h2 data-bind="aboutTitle">Sobre a clínica</h2>
             <p data-bind="aboutText">
               Somos uma clínica odontológica focada em acolhimento, prevenção e tratamentos personalizados.
               Nosso compromisso é tornar cada consulta mais tranquila, clara e segura.
@@ -147,7 +147,7 @@
 
       <footer class="site-footer">
         <div>
-          <strong data-bind="clinicName">Sorri + Vida</strong>
+          <strong data-bind="clinicName">Clínica</strong>
           <p data-bind="slogan">Cuidando do seu sorriso com carinho, tecnologia e confiança.</p>
         </div>
         <a data-bind-attr="whatsappHref:href" target="_blank" rel="noopener">Agendar avaliação</a>
@@ -157,9 +157,9 @@
     <div id="adminApp" class="admin-app" hidden>
       <section id="adminLogin" class="admin-login">
         <form class="login-card" id="loginForm">
-          <span class="brand-mark">S+</span>
+          <span class="brand-mark" data-brand-mark>C</span>
           <h1>Portal do Admin</h1>
-          <p>Sorri + Vida</p>
+          <p data-bind="clinicName">Clínica</p>
           <label>Usuário<input name="user" autocomplete="username" required /></label>
           <label>Senha<input name="password" type="password" autocomplete="current-password" required /></label>
           <button class="btn primary full" type="submit">Entrar</button>
@@ -170,8 +170,8 @@
       <section id="adminDashboard" class="admin-dashboard" hidden>
         <aside class="admin-sidebar">
           <a class="brand admin-brand" href="./">
-            <span class="brand-mark">S+</span>
-            <span><strong>Sorri + Vida</strong><small>Painel de edição</small></span>
+            <span class="brand-mark" data-brand-mark>C</span>
+            <span><strong data-bind="clinicName">Clínica</strong><small>Painel de edição</small></span>
           </a>
           <nav class="admin-tabs" aria-label="Seções do painel">
             <button class="active" data-tab="geral" type="button">Geral</button>
@@ -196,6 +196,8 @@
             <section class="admin-panel active" data-panel="geral">
               <div class="form-grid">
                 <label>Nome da clínica<input name="clinicName" /></label>
+                <label>Título da página<input name="siteTitle" /></label>
+                <label class="wide">Descrição para buscadores<textarea name="metaDescription" rows="3"></textarea></label>
                 <label>Slogan<input name="slogan" /></label>
                 <label>Título da home<input name="heroTitle" /></label>
                 <label>Texto do botão principal<input name="ctaText" /></label>

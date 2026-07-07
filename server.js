@@ -33,11 +33,13 @@ const mime = {
 };
 
 const defaultSettings = {
-  clinicName: "Sorri + Vida",
+  siteTitle: "Clínica odontológica",
+  metaDescription: "Clínica odontológica com atendimento humanizado, tecnologia e cuidado para toda a família.",
+  clinicName: "Clínica",
   slogan: "Cuidando do seu sorriso com carinho, tecnologia e confiança.",
   heroTitle: "Sorrisos saudáveis começam com cuidado de verdade.",
   homeText:
-    "Na Sorri + Vida, oferecemos atendimento odontológico humanizado para toda a família, unindo profissionais qualificados, estrutura confortável e cuidado em cada detalhe.",
+    "Oferecemos atendimento odontológico humanizado para toda a família, unindo profissionais qualificados, estrutura confortável e cuidado em cada detalhe.",
   ctaText: "Agende sua avaliação",
   ctaHref: "https://wa.me/5511999999999?text=Olá!%20Quero%20agendar%20uma%20avaliação.",
   phone: "(11) 9999-9999",
@@ -49,7 +51,7 @@ const defaultSettings = {
   mapsEmbed:
     '<iframe src="https://www.google.com/maps?q=Av.%20Brasil%201000%20Centro%20Sao%20Paulo&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
   heroImage: "./assets/clinic-hero.png",
-  aboutTitle: "Clínica Sorri + Vida",
+  aboutTitle: "Sobre a clínica",
   aboutText:
     "Somos uma clínica odontológica focada em acolhimento, prevenção e tratamentos personalizados. Nosso compromisso é tornar cada consulta mais tranquila, clara e segura.",
   mission: "Cuidar da saúde bucal com excelência, respeito e atenção aos detalhes.",
@@ -90,7 +92,7 @@ const defaultSettings = {
 init()
   .then(() => {
     http.createServer(handleRequest).listen(port, "0.0.0.0", () => {
-      console.log(`Sorri + Vida rodando em http://0.0.0.0:${port}`);
+      console.log(`Site da clínica rodando em http://0.0.0.0:${port}`);
     });
   })
   .catch((error) => {
