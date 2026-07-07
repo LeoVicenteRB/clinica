@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    container_name: sorri_mais_vida_web
+    container_name: clinica_web
     restart: unless-stopped
     ports:
       - "${APP_PORT:-4173}:4173"
@@ -9,14 +9,14 @@ services:
       PORT: 4173
       DATABASE_URL: postgres://${POSTGRES_USER:-clinica}:${POSTGRES_PASSWORD:-clinica123}@db:5432/${POSTGRES_DB:-clinica}
       ADMIN_USER: ${ADMIN_USER:-admin}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-sorrimaisvida}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@12345}
     depends_on:
       db:
         condition: service_healthy
 
   db:
     image: postgres:16-alpine
-    container_name: sorri_mais_vida_db
+    container_name: clinica_db
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-clinica}

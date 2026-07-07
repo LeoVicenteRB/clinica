@@ -36,7 +36,7 @@
             body: JSON.stringify({ user: data.get("user"), password: data.get("password") })
           });
           if (!response.ok) throw new Error("Usuário ou senha inválidos.");
-          location.href = "/admin-sorrimaisvida/painel";
+          location.href = "/admin/painel";
         } catch (error) {
           feedback.textContent = error.message || "Não foi possível entrar.";
         }

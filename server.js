@@ -9,7 +9,7 @@ const databaseUrl = process.env.DATABASE_URL || "";
 const fallbackFile = path.join(root, "data", "settings.json");
 const fallbackUsersFile = path.join(root, "data", "users.json");
 const sessions = new Map();
-const sessionCookie = "sorri_admin_session";
+const sessionCookie = "clinic_admin_session";
 const csrfHeader = "x-csrf-token";
 
 let pool = null;
@@ -42,7 +42,7 @@ const defaultSettings = {
   ctaHref: "https://wa.me/5511999999999?text=Olá!%20Quero%20agendar%20uma%20avaliação.",
   phone: "(11) 9999-9999",
   whatsapp: "(11) 99999-9999",
-  email: "contato@sorrimaisvida.com.br",
+  email: "contato@clinica.com.br",
   hours: "Segunda a sexta, das 8h às 18h. Sábado, das 8h às 12h.",
   address: "Av. Brasil, 1000 - Centro, São Paulo - SP",
   mapsLink: "https://www.google.com/maps",
@@ -103,7 +103,7 @@ async function handleRequest(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || `localhost:${port}`}`);
 
     if (req.method === "GET" && url.pathname === "/config.js") {
-      sendText(res, 200, "application/javascript; charset=utf-8", `window.SORRI_ADMIN_CONFIG = ${JSON.stringify({ ADMIN_USER: process.env.ADMIN_USER || "admin" })};`);
+      sendText(res, 200, "application/javascript; charset=utf-8", `window.CLINIC_ADMIN_CONFIG = ${JSON.stringify({ ADMIN_USER: process.env.ADMIN_USER || "admin" })};`);
       return;
     }
 
@@ -181,18 +181,18 @@ async function handleRequest(req, res) {
       return;
     }
 
-    if (url.pathname === "/admin-sorrimaisvida" || url.pathname === "/admin-sorrimaisvida/") {
+    if (url.pathname === "/admin" || url.pathname === "/admin/") {
       if (getSession(req)) {
-        redirect(res, "/admin-sorrimaisvida/painel");
+        redirect(res, "/admin/painel");
         return;
       }
       await sendFile(res, path.join(root, "admin-login.html"));
       return;
     }
 
-    if (url.pathname === "/admin-sorrimaisvida/painel") {
+    if (url.pathname === "/admin/painel") {
       if (!getSession(req)) {
-        redirect(res, "/admin-sorrimaisvida/");
+        redirect(res, "/admin/");
         return;
       }
       await sendFile(res, path.join(root, "admin-panel.html"));
@@ -394,7 +394,7 @@ function redirect(res, location) {
 async function ensureDefaultUser() {
   const rawAdminUser = process.env.ADMIN_USER || "admin";
   const adminUser = normalizeUsername(rawAdminUser) || "admin";
-  let adminPassword = String(process.env.ADMIN_PASSWORD || "sorrimaisvida");
+  let adminPassword = String(process.env.ADMIN_PASSWORD || "Admin@12345");
 
   if (adminUser !== rawAdminUser) {
     console.warn(`ADMIN_USER inválido ou normalizado. Usando "${adminUser}".`);

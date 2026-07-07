@@ -1,5 +1,5 @@
 (function () {
-  const STORAGE_KEY = "sorriMaisVidaSettings";
+  const STORAGE_KEY = "clinicSiteSettings";
   const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
   const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
   let csrfToken = "";
@@ -14,7 +14,7 @@
     ctaHref: "https://wa.me/5511999999999?text=Olá!%20Quero%20agendar%20uma%20avaliação.",
     phone: "(11) 9999-9999",
     whatsapp: "(11) 99999-9999",
-    email: "contato@sorrimaisvida.com.br",
+    email: "contato@clinica.com.br",
     hours: "Segunda a sexta, das 8h às 18h. Sábado, das 8h às 12h.",
     address: "Av. Brasil, 1000 - Centro, São Paulo - SP",
     mapsLink: "https://www.google.com/maps",
@@ -236,11 +236,11 @@
   }
 
   function isAdminRoute() {
-    if (location.hash === "#admin-sorrimaisvida") {
-      location.href = "/admin-sorrimaisvida/";
+    if (location.hash === "#admin") {
+      location.href = "/admin/";
       return false;
     }
-    return location.pathname.includes("admin-sorrimaisvida");
+    return location.pathname === "/admin" || location.pathname === "/admin/" || location.pathname.startsWith("/admin/");
   }
 
   async function setupAdmin() {
@@ -253,8 +253,8 @@
     if (await checkAdminSession()) {
       showDashboard();
     } else {
-      if (location.pathname.includes("/painel")) {
-        location.href = "/admin-sorrimaisvida/";
+        if (location.pathname.includes("/painel")) {
+          location.href = "/admin/";
         return;
       }
       showLogin();
@@ -276,8 +276,8 @@
         if (!response.ok) throw new Error("Usuário ou senha inválidos.");
         const payload = await response.json();
         csrfToken = payload.csrfToken || "";
-        if (location.pathname.includes("admin-sorrimaisvida") && !location.pathname.includes("/painel")) {
-          location.href = "/admin-sorrimaisvida/painel";
+        if (location.pathname.startsWith("/admin") && !location.pathname.includes("/painel")) {
+          location.href = "/admin/painel";
           return;
         }
         showDashboard();
@@ -312,7 +312,7 @@
 
   function showLogin() {
     if (location.pathname.includes("/painel")) {
-      location.href = "/admin-sorrimaisvida/";
+      location.href = "/admin/";
       return;
     }
     byId("adminLogin").hidden = false;

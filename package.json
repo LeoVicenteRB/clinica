@@ -1,5 +1,5 @@
 {
-  "name": "sorri-mais-vida-site",
+  "name": "clinica-site",
   "version": "1.0.0",
   "private": true,
   "description": "Site institucional da clínica Sorri + Vida com portal admin e persistência em Postgres.",
